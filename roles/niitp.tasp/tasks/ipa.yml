@@ -1,0 +1,44 @@
+- name: Register TASP proxy service
+  ipa_service:
+    name: "{{ niitp_tasp_proxy_principle }}"
+    state: present
+    ipa_host: "{{ niitp_tasp_ipa_host }}"
+    ipa_user: "{{ niitp_tasp_ipa_user }}"
+    ipa_pass: "{{ niitp_tasp_ipa_pass }}"
+
+- name: Check if proxy keytab exists
+  stat:
+    path: "{{ niitp_tasp_proxy_keytab }}"
+  register: proxy_keytab_stat
+
+- name: Check kvno of proxy keytab
+  command: kinit -k -t {{ niitp_tasp_proxy_keytab }} {{ niitp_tasp_proxy_principle }}
+  register: validate_proxy_keytab
+  changed_when: false
+  failed_when:
+    - validate_proxy_keytab.rc > 1
+  when: proxy_keytab_stat.stat.exists
+
+- name: Make sure destination proxy keytab dir exists
+  file:
+    state: directory
+    path: "{{ niitp_tasp_proxy_keytab | dirname }}"
+    mode: "0770"
+
+- name: Get proxy keytab
+  shell: |
+    set -o pipefail
+    echo '{{ niitp_tasp_ipa_pass }}' | kinit {{ niitp_tasp_ipa_user }}
+    ipa-getkeytab -s {{ niitp_tasp_ipa_host }} -p {{ niitp_tasp_proxy_principle }} -k {{ niitp_tasp_proxy_keytab }}
+  register: get_proxy_keytab
+  when: ( not proxy_keytab_stat.stat.exists ) or ( validate_proxy_keytab.rc )
+  changed_when: "niitp_tasp_proxy_keytab in get_proxy_keytab.stderr"
+  no_log: true
+
+- name: Ensure proxy keytab owner and mode
+  file:
+    state: file
+    path: "{{ niitp_tasp_proxy_keytab }}"
+    owner: "{{ niitp_tasp_user }}"
+    group: "{{ niitp_tasp_group }}"
+    mode: "0644"

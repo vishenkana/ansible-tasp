@@ -1,0 +1,13 @@
+- name: Copy TASP docker-compose file
+  copy:
+    src: docker-compose.yml
+    dest: "{{ niitp_tasp_dir }}/docker-compose.yml"
+    mode: "0644"
+
+- name: Copy TASP Docker images
+  copy:
+    src: images
+    dest: "{{ niitp_tasp_dir }}/"
+    directory_mode: "0755"
+    mode: "0644"
+  notify: Load TASP docker images

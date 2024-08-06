@@ -1,0 +1,51 @@
+- name: Create TASP install directory
+  file:
+    path: "{{ niitp_tasp_dir }}"
+    state: directory
+    mode: "0755"
+
+- name: Create TASP var directory
+  file:
+    path: "{{ niitp_tasp_docker_volume }}"
+    state: directory
+    mode: "0775"
+
+- name: Grant default rwx access to a var dir for group '{{ niitp_tasp_group }}'
+  acl:
+    path: "{{ niitp_tasp_docker_volume }}"
+    entity: "{{ niitp_tasp_group }}"
+    etype: group
+    permissions: rwx
+    default: true
+    recursive: true
+    state: present
+
+- name: Grant default rwx access to a var dir for user '{{ niitp_tasp_user }}'
+  acl:
+    path: "{{ niitp_tasp_docker_volume }}"
+    entity: "{{ niitp_tasp_user }}"
+    etype: user
+    permissions: rwx
+    default: true
+    recursive: true
+    state: present
+
+- name: Grant rwx access to a var dir for group '{{ niitp_tasp_group }}'
+  acl:
+    path: "{{ niitp_tasp_docker_volume }}"
+    entity: "{{ niitp_tasp_group }}"
+    etype: group
+    permissions: rwx
+    default: false
+    recursive: true
+    state: present
+
+- name: Grant rwx access to a var dir for user '{{ niitp_tasp_user }}'
+  acl:
+    path: "{{ niitp_tasp_docker_volume }}"
+    entity: "{{ niitp_tasp_user }}"
+    etype: user
+    permissions: rwx
+    default: false
+    recursive: true
+    state: present

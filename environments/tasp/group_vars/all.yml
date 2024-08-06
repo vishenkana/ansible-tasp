@@ -1,0 +1,2 @@
+niitp_tasp_pg_port: 5432
+niitp_tasp_auth_gss: true

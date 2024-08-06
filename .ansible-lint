@@ -1,0 +1,4 @@
+---
+skip_list:
+  # Astra Linux 1.7 old ansible version
+  - fqcn[action-core]

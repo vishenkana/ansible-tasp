@@ -1,0 +1,12 @@
+- name: Include configure TASP directories
+  include_tasks: dirs.yml
+
+- name: Include copy TASP files
+  include_tasks: copy.yml
+
+- name: Include configure TASP
+  include_tasks: configure.yml
+
+- name: Include FreeIPA tasks
+  include_tasks: ipa.yml
+  when: niitp_tasp_auth_gss

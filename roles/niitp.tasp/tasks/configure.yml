@@ -1,0 +1,5 @@
+- name: Configure TASP .env file
+  template:
+    src: env.j2
+    dest: "{{ niitp_tasp_dir }}/.env"
+    mode: "0644"

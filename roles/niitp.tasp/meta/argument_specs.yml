@@ -1,0 +1,94 @@
+---
+argument_specs:
+  main:
+    options:
+      niitp_tasp_user:
+        type: "str"
+        required: false
+        description: "TASP user"
+        default: "tasp"
+
+      niitp_tasp_group:
+        type: "str"
+        required: false
+        description: "TASP group"
+        default: "opertasp"
+
+      niitp_tasp_maclabel:
+        type: "int"
+        required: false
+        description: "TASP mandatory label"
+        default: 0
+
+      niitp_tasp_dir:
+        type: "path"
+        required: false
+        description: "TASP install directory"
+        default: "/spo/niitp/tasp"
+
+      niitp_tasp_docker_volume:
+        type: "path"
+        required: false
+        description: "TASP volume directory"
+        default: "/var/spo/niitp/tasp"
+
+      niitp_tasp_proxy_port:
+        type: "int"
+        required: false
+        description: "TASP proxy port"
+        default: 8080
+
+      niitp_tasp_pg_port:
+        type: "int"
+        required: false
+        description: "TASP PostgreSQL port"
+        default: 5432
+
+      niitp_tasp_auth_gss:
+        type: "bool"
+        required: false
+        description: "TASP enable GSS auth"
+        default: false
+
+      niitp_tasp_proxy_keytab:
+        type: "path"
+        required: false
+        description: "TASP proxy keytab path"
+        default: "/var/spo/niitp/tasp/proxy/proxy.keytab"
+
+      niitp_tasp_proxy_log_level:
+        type: "str"
+        required: false
+        description: "TASP proxy log level"
+        default: "info"
+
+      niitp_tasp_proxy_principle:
+        type: "str"
+        required: false
+        description: "TASP proxy service FreeIPA principle"
+        default: "HTTP/tasp.t500.ar"
+
+      niitp_tasp_ui_log_level:
+        type: "str"
+        required: false
+        description: "TASP ui log level"
+        default: "info"
+
+      niitp_tasp_ipa_host:
+        type: "str"
+        required: false
+        description: "FreeIPA hostname"
+        default: "dc.t500.ar"
+
+      niitp_tasp_ipa_user:
+        type: "str"
+        required: false
+        description: "FreeIPA username"
+        default: "admin"
+
+      niitp_tasp_ipa_pass:
+        type: "str"
+        required: false
+        description: "FreeIPA password"
+        default: "12345678"
+        no_log: true

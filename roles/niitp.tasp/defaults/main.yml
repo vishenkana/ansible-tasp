@@ -1,0 +1,21 @@
+niitp_tasp_user: tasp
+niitp_tasp_group: opertasp
+niitp_tasp_maclabel: 0
+
+niitp_tasp_dir: /spo/niitp/tasp
+
+niitp_tasp_auth_gss: false
+niitp_tasp_docker_volume: /var/spo/niitp/tasp
+
+niitp_tasp_pg_port: 5433
+
+niitp_tasp_proxy_port: 8080
+niitp_tasp_proxy_keytab: "{{ niitp_tasp_docker_volume }}/proxy/proxy.keytab"
+niitp_tasp_proxy_log_level: info
+niitp_tasp_proxy_principle: HTTP/tasp.t500.ar
+
+niitp_tasp_ui_log_level: info
+
+niitp_tasp_ipa_host: dc.t500.ar
+niitp_tasp_ipa_user: admin
+niitp_tasp_ipa_pass: 12345678

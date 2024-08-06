@@ -1,0 +1,6 @@
+- name: Load TASP docker images
+  command: pdp-exec -u {{ niitp_tasp_user }} -l {{ niitp_tasp_maclabel }} -- rootlessenv docker load -i {{ item }}
+  register: result
+  changed_when: "'Loaded image' in result.stdout"
+  with_fileglob:
+    - "{{ niitp_tasp_dir }}/images/*"
